@@ -18,34 +18,11 @@
  *    ./classifier 7 lists/training_full.txt lists/testing_full.txt
  */
 
-/*****************************************************************************/
-/* Do not add anything outside the main function here. Any core logic other  */
-/* than what is described below should go into `knn.c`. You've been warned!  */
-/*****************************************************************************/
-
 /**
  * main() takes in 3 command line arguments:
  *    - K : The K value for K nearest neighbours
  *    - training_list: Name of a file with paths to a set of training images
  *    - testing_list:  Name of a file with paths to a set of testing images
- *
- * You need to do the following:
- *    - Parse the command line arguments, call `load_dataset()` appropriately.
- *    - For each test image, call `knn_predict()` and compare with real label
- *    - Use the printf statements provided to print the result of knn_predict
- *      (Do not print any other output)
- */
-
-/* To store the data from the training and test datasets, we are using a 
- * series of arrays.  Generally speaking, this is a poor design decision
- * because global variables like this are frowned upon, because we are 
- * allocating more memory than necessary, and the code would be more 
- * readable if we could collect data that belonged together into objects
- * (structs).  It is also inflexible, because we cannot handle different 
- * image sizes.
- * 
- * However, we are using this approach because we have not yet covered
- * structs or dynamic memory allocation.
  */
 
 /* training_dataset - a 2D array where each row contains the pixels for a 
@@ -87,11 +64,10 @@ int main(int argc, char *argv[]) {
     num_test_files = load_dataset(test_file_list, test_dataset, test_labels);
     
 
-    /* TODO: for each image in the test image dataset, call knn_predict
+    /* for each image in the test image dataset, call knn_predict
      * to make a prediction for what digit is represented.  If the
      * prediction matches the test image label, then increment the number
-     * of correct predictions.  Hint: the return value of load_dataset tells
-     * you how many images of each type you have.
+     * of correct predictions.  
      */
     for(int i=0; i< num_test_files; i++){
         if(test_labels[i] == knn_predict(test_dataset[i], K, training_dataset, training_labels, num_training_files)){
